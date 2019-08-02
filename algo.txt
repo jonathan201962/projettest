@@ -1,0 +1,400 @@
+L'ordinateur choisi un nombre entre 0 et 100 
+L'utilisateur doit trouver ce nombre
+L'utilisateur propose une solution 
+l'ordinateur répond bon / trop grand / trop petit 
+Boucler tant que le salotion n'est pas trouvée
+S'assurer la validité de l'input de l'utilisateur
+
+// afficher nombre
+Tant que nombreChoisi n'est pas un nombre OU que nombreChoisi < 0 ou que nombreChoisi > 100
+	Si nombreChoisi n'est pas un nombre alors 
+		afficher "ce n'est pas un nombre"
+	Sinon Si nombreChoisi < 0 ou > 100 alors 
+                afficher " le nombre doit etre entre 0 et 100 "
+	Fin Si 
+	Recuperer input dans nombreChoisi 
+Fin tant que 
+Afficher nombreChoisi
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// le juste prix 0 a 100 ( l'utilisateur qui devine)
+
+rentrer un nombre aleatoire de 0 a 100 dans choixOrdinateur
+afficher choisir un nombre aleatoire de 0 a 100 dans choixOrdinateur
+rentrer l'input de l'utilisateur dans choix utilisateur
+Tant que nombreChoisi n'est pas un nombre OU que nombreChoisi < 0 ou que nombreChoisi > 100
+	Si nombreChoisi n'est pas un nombre alors 
+		afficher "ce n'est pas un nombre"
+	Sinon Si nombreChoisi < 0 ou > 100 alors 
+                afficher " le nombre doit etre entre 0 et 100 "
+	Fin Si 
+	Recuperer input dans choixUtilisateur
+Fin tant que 
+
+Afficher choixUtilisateur
+tant que choixUtilisateur != choixOrdinateur
+// verification du trop grand ou trop petit 
+si choixUtilisateur < choixOrdinateur alors afficher "trop petit"
+rentrer l'input de l'utilisateur dans choixUtilisateur
+Sinon Si choixUtilisateur > choixOrdinateur alors afficher "trop grand" 
+rentrer l'input de l'utilisateur  dans choixUtilisateur 
+
+Fin Si
+// recuperer le nouveau choix de l'utilisateur + verification 
+Fin Tant que
+
+Fin Tant que 
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Un carnet d’adresse
+- Un menu principal (accessible en choisissant le numéro de l’option)
+   - 1.Tout Afficher
+       - Lister l’ensemble des contacts et leurs info ()“J’affiche les informations du contact”)
+   - 2.Chercher par nom
+       - Demander le nom du contact
+       - Afficher les informations des contacts ayant le nom entré par l’utilisateur
+   - 3.Ajouter un contact
+       - Demander le nom, prénom, société, téléphone et mail
+       - Créer automatiquement un id
+       - Ajouter à la liste des utilisateurs
+   - 4.Modifier un contact
+       - Lister les utilisateurs
+       - Demande l’id
+       - Demander quel champ modifier
+       - Demander la nouvelle valeur
+       - Modifier le contact
+   - 5.Supprimer un contact
+       - Lister les utilisateurs
+       - Demande l’id
+       - Supprimer le contact
+   - 6.Quitter le programme
+- Le carnet d’adresse sera dans une variable
+- Le contact contiendra : id, nom, prénom, société, téléphone, mail
+
+
+   // Menu principal algo
+
+J'initialise la collection carnetAdresse
+Je rentre 0 dans choixMenu
+Je rentre 0 dans idContact
+
+FONCTION afficherCarnet
+    POUR CHAQUE contact DANS carnetAdresse
+        Afficher les informations du contact
+    FIN POUR CHAQUE
+FIN FONCTION
+
+FONCTION afficherContactsParNom
+    // Récupération du nom à chercher
+    Afficher "Quel nom souhaitez-vous chercher ?"
+    Récupérer l'input de l'utilisateur dans nomContact
+
+    // Recherche des contacts
+    Initialiser nbContact à 0
+    POUR CHAQUE contact DANS carnetAdresse
+        SI le "nom" de contact == nomContact ALORS
+            Afficher les informations du contact
+            Ajouter 1 à nbContact
+        FIN SI
+    FIN POUR CHAQUE
+
+    // Message final
+    SI nbContact est égal à 0 ALORS
+        Afficher "Aucun contact ne porte le nom nomContact"
+    SINON
+        Afficher "--nbContact contact(s) trouvé(s)"
+    FIN SI
+
+    retourner nbContact
+FIN FONCTION
+
+TANT QUE choixMenu != 6
+
+    // Affichage du menu principal
+    Afficher "-- Menu Principal --"
+    Afficher "1.Tout Afficher"
+    Afficher "2.Chercher par nom"
+    Afficher "3.Ajouter un contact"
+    Afficher "4.Modifier un contact"
+    Afficher "5.Supprimer un contact"
+    Afficher "6.Quitter le programme"
+    Afficher "Que souhaitez-vous faire ? [1-6]"
+
+    // Récupération du choix de l'utilisateur
+    Récupérer l'input de l'utilisateur dans choixMenu
+
+    // Choix "Afficher les contacts"
+    SI choixMenu == 1 ALORS
+        Appeler la fonction 'afficherCarnet'
+
+    // Choix "Chercher un contact"
+    SINON SI choixMenu == 2 ALORS
+        Appeler la fonction 'afficherContactsParNom'
+
+    // Choix "Ajouter un contact"
+    SINON SI choixMenu == 3 ALORS
+
+        // Récupérer les informations du contact
+        Afficher "Pour créer le contact, merci de renseigner les informations suivantes : "
+        Afficher "Nom :"
+        Récupérer l'input de l'utilisateur dans la variable nomContact
+        Afficher "Prénom :"
+        Récupérer l'input de l'utilisateur dans la variable prenomContact
+        Afficher "Société :"
+        Récupérer l'input de l'utilisateur dans la variable societeContact
+        Afficher "Téléphone :"
+        Récupérer l'input de l'utilisateur dans la variable telephoneContact
+        Afficher "Mail :"
+        Récupérer l'input de l'utilisateur dans la variable mailContact
+
+
+        // Créer le dictionnaire du contact
+        Créer un dictionnaire 'contact' avec les doublons clés/valeurs suivants:
+            - "id" : idContact
+            - "nom" : nomContact
+            - "prenom" : prenomContact
+            - "societe" : societeContact
+            - "telephone" : telephoneContact
+            - "mail" : mailContact
+        Ajouter 1 à idContact
+
+        // Ajouter le contact au carnet d'adresse
+        Ajouter le dictionnaire 'contact' à la fin de la collection 'carnetAdresse'
+
+    // Choix "Modifier un contact"
+    SINON SI choixMenu == 4 ALORS
+        Appeler la fonction 'afficherContactsParNom' et récupérer son retour dans nbContact
+        SI nbContact == 0 ALORS
+            Afficher "Impossible de modifier, contact inconnu"
+        SINON
+            Afficher "Veuillez sélectionner un contact en entrant son ID"
+            Récupérer l'input de l'utilisateur dans idContact
+            Initialiser indexContact à -1
+            Initialiser indexTemp à 0
+
+            // Récupérer l'index du contact (certains langages parcourent les collections en lecture seule.)
+            POUR CHAQUE contact DANS carnetAdresse
+                SI 'id' de contact == idContact ALORS
+                    Insérer indexTemp dans indexContact
+                FIN SI
+                Ajouter 1 à indexTemp
+            FIN POUR CHAQUE
+
+            //
+            SI indexContact == -1 ALORS
+                Afficher "Aucun contact ne porte l'id idContact"
+            SINON
+                // nom
+                Afficher "Nouveau nom ? (carnetAdresse[ indexContact ][ "nom" ])"
+                Récupère l'input de l'utilisateur dans la variable 'valeur'
+                SI valeur n'est pas vide ALORS
+                    carnetAdresse[ indexContact ][ "nom" ] = valeur
+                FIN SI
+                // prénom
+                Afficher "Nouveau prenom ? (carnetAdresse[ indexContact ][ "prenom" ])"
+                Récupère l'input de l'utilisateur dans la variable 'valeur'
+                SI valeur n'est pas vide ALORS
+                    carnetAdresse[ indexContact ][ "prenom" ] = valeur
+                FIN SI
+                // société
+                Afficher "Nouvelle societe ? (carnetAdresse[ indexContact ][ "societe" ])"
+                Récupère l'input de l'utilisateur dans la variable 'valeur'
+                SI valeur n'est pas vide ALORS
+                    carnetAdresse[ indexContact ][ "societe" ] = valeur
+                FIN SI
+                // Téléphone
+                Afficher "Nouveau telephone ? (carnetAdresse[ indexContact ][ "telephone" ])"
+                Récupère l'input de l'utilisateur dans la variable 'valeur'
+                SI valeur n'est pas vide ALORS
+                    carnetAdresse[ indexContact ][ "telephone" ] = valeur
+                FIN SI
+                // Mail
+                Afficher "Nouvelle adresse mail ? (carnetAdresse[ indexContact ][ "mail" ])"
+                Récupère l'input de l'utilisateur dans la variable 'valeur'
+                SI valeur n'est pas vide ALORS
+                    carnetAdresse[ indexContact ][ "mail" ] = valeur
+                FIN SI
+            FIN SI
+
+        FIN SI
+
+    // Choix "Supprimer un contact"
+    SINON SI choixMenu == 5 ALORS
+        Appeler la fonction 'afficherContactsParNom' et récupérer son retour dans nbContact
+        SI nbContact == 0 ALORS
+            Afficher "Impossible de modifier, contact inconnu"
+        SINON
+            Afficher "Veuillez sélectionner un contact en entrant son ID"
+            Récupérer l'input de l'utilisateur dans idContact
+            POUR CHAQUE contact DANS carnetAdresse
+                SI 'id' de contact == idContact ALORS
+                    Supprimer le dictionnaire de la collection carnetAdresse
+                FIN SI
+            FIN POUR CHAQUE
+        FIN SI
+
+    // Choix "Quitter le programme"
+    SINON SI choixMenu == 6 ALORS
+        Afficher "Bye bye"
+
+    // Entrée non valide
+    SINON
+        Afficher "Seuls un chiffre entre 1 et 6 est valable"
+
+    FIN SI
+
+FIN TANT QUE
+Réduire
+
+ Code Python : carnet d'adresse 
+
+carnetAdresse = [{'id': '0', 'nom': 'a', 'prenom': 'e', 'societe': 'b', 'telephone': 'f', 'mail': 'e'},
+{'id': '1', 'nom': 'e', 'prenom': 'r', 'societe': 't', 'telephone': 'y', 'mail': 'u'}]
+choixMenu = 0
+idContact = 0
+?
+def afficherCarnet():
+    for contact in carnetAdresse:
+        print(contact)
+?
+def afficherContactsParNom():
+    print( "Quel nom souhaitez-vous chercher ?" )
+    nomContact = input()
+?
+    nbContact = 0
+    for contact in carnetAdresse:
+        if contact[ "nom" ] == nomContact:
+            print( contact )
+            nbContact += 1
+?
+    if nbContact == 0:
+        print( "Aucun contact ne porte le nom", nomContact )
+    else:
+        print( "--", nbContact, "contact(s) trouvé(s)" )
+?
+    return nbContact
+?
+while choixMenu != "6":
+?
+    print( "\n" )
+    print( "-- Menu Principal --" )
+    print( "1.Tout Afficher" )
+    print( "2.Chercher par nom" )
+    print( "3.Ajouter un contact" )
+    print( "4.Modifier un contact" )
+    print( "5.Supprimer un contact" )
+    print( "6.Quitter le programme" )
+    print( "Que souhaitez-vous faire ? [1-6]" )
+?
+    choixMenu = input()
+?
+    if choixMenu == "1":
+        print("")
+        afficherCarnet()
+?
+    elif choixMenu == "2":
+        afficherContactsParNom()
+?
+    elif choixMenu == "3":
+        print( "Pour créer le contact, merci de renseigner les informations suivantes :" )
+        nomContact = input( "nom: " )
+        prenomContact = input( "prenom: " )
+        societeContact = input( "societe: " )
+        telephoneContact = input( "telephone: " )
+        mailContact = input( "mail: " )
+?
+        contact = {
+            "id": str(idContact),
+            "nom": nomContact,
+            "prenom": prenomContact,
+            "societe": societeContact,
+            "telephone": telephoneContact,
+            "mail": mailContact
+        }
+?
+        idContact += 1
+?
+        carnetAdresse.append( contact )
+?
+    elif choixMenu == "4":
+        nbContact = afficherContactsParNom()
+        if nbContact == 0:
+            print( "Impossible de modifier, contact inconnu" )
+        else:
+            idContact = input( "Sélectionner l'id à modifier: " )
+            indexContact = -1
+            indexTemp = 0
+?
+            for contact in carnetAdresse:
+                if contact[ "id" ] == idContact:
+                    indexContact = indexTemp
+                    break
+                indexTemp += 1
+?
+            if indexContact == -1:
+                print( "Aucun contact n'a l'id", idContact )
+            else:
+                # nom
+                valeur = input( "Nouveau nom? (" + carnetAdresse[ indexContact ][ "nom" ] + ") :" )
+                if valeur != "":
+                    carnetAdresse[ indexContact ][ "nom" ] = valeur
+                # prenom
+                valeur = input( "Nouveau prenom? (" + carnetAdresse[ indexContact ][ "prenom" ] + ") :" )
+                if valeur != "":
+                    carnetAdresse[ indexContact ][ "prenom" ] = valeur
+                # societe
+                valeur = input( "Nouveau societe? (" + carnetAdresse[ indexContact ][ "societe" ] + ") :" )
+                if valeur != "":
+                    carnetAdresse[ indexContact ][ "societe" ] = valeur
+                # telephone
+                valeur = input( "Nouveau telephone? (" + carnetAdresse[ indexContact ][ "telephone" ] + ") :" )
+                if valeur != "":
+                    carnetAdresse[ indexContact ][ "telephone" ] = valeur
+                # mail
+                valeur = input( "Nouveau mail? (" + carnetAdresse[ indexContact ][ "mail" ] + ") :" )
+                if valeur != "":
+                    carnetAdresse[ indexContact ][ "mail" ] = valeur
+?
+    elif choixMenu == "5":
+        nbContact = afficherContactsParNom()
+        if nbContact == 0:
+            print( "Impossible de supprimer, contact inconnu" )
+        else:
+            idContact = input( "Sélectionner l'id à supprimer: " )
+            indexContact = -1
+            indexTemp = 0
+?
+            for contact in carnetAdresse:
+                if contact[ "id" ] == idContact:
+                    indexContact = indexTemp
+                    break
+                indexTemp += 1
+?
+            if indexContact == -1:
+                print( "Aucun contact n'a l'id", idContact )
+            else:
+                carnetAdresse.pop( indexContact )
+?
+    elif choixMenu == "6":
+        print( "Fin de programme" )
+?
+    else:
+        print( "Choix menu inconnu, veuillez rentrer un chiffre entre 1 et 6" )
+Réduire
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

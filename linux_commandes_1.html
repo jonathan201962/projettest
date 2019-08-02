@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Formation Linux Commandes de base</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+body {
+        font-family: 'Droid Serif';
+      }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+      .remark-slide-content h1 { font-size: 3em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+        color: #B4045F
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .large { font-size: 2em; }
+      a, a > code {
+        color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+      code {
+        background: #e7e8e2;
+        border-radius: 5px;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .pull-left {
+        float: left;
+        width: 47%;
+      }
+      .pull-right {
+        float: right;
+        width: 47%;
+      }
+      .pull-right ~ p {
+        clear: both;
+      }
+      #slideshow .slide .content code {
+        font-size: 0.8em;
+      }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 0.8em;
+      }
+
+      /* Slide-specific styling */
+      #slide-inverse .footnote {
+        bottom: 12px;
+        left: 20px;
+      }
+      #slide-how .slides {
+        font-size: 0.9em;
+        position: absolute;
+        top:  151px;
+        right: 140px;
+      }
+      #slide-how .slides h3 {
+        margin-top: 0.2em;
+      }
+      #slide-how .slides .first, #slide-how .slides .second {
+        padding: 1px 20px;
+        height: 90px;
+        width: 120px;
+        -moz-box-shadow: 0 0 10px #777;
+        -webkit-box-shadow: 0 0 10px #777;
+        box-shadow: 0 0 10px #777;
+      }
+      #slide-how .slides .first {
+        background: #fff;
+        position: absolute;
+        top: 20%;
+        left: 20%;
+        z-index: 1;
+      }
+      #slide-how .slides .second {
+        position: relative;
+        background: #fff;
+        z-index: 0;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        color: #777;
+        width: 20%;
+        height: 92%;
+        float: left;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #B4045F;
+        }
+      .right-column {
+        width: 75%;
+        color: #B4045F;
+        float: right;
+        padding-top: 1em;
+      }
+      .right-column-white {
+        width: 80%;
+        color: #696969;
+        float: right;
+        padding-top: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+---
+# Formation Linux Commandes De Base
+.footnote[vincent.alcouffe@posteo.net]
+---
+layout: false
+class: left, left, inverse
+.left-column[
+# Sommaire
+]
+.right-column[
+- Histoire de Linux
+
+- Installation d'une distribution Linux
+
+- Commandes de base
+
+- Gestion des fichiers
+
+- Gestion des utilisateurs et des groupes
+
+- Gestion des disques et du stockage
+
+- Gestion des processus et services
+
+- Gestion des script Bash
+
+]
+
+---
+
+class: center, middle, inverse
+# Histoire de Linux
+
+---
+
+layout: false
+.left-column[
+# Histoire de Linux
+### - Unix
+]
+.right-column-white[
+- Unix, est une famille de systèmes d'exploitation multitâche et multi-utilisateur, développé dans les années 1970. Il
+repose sur un interpréteur (le shell) avec des actions initié en** ligne de commande **.
+]
+
+---
+
+layout: false
+.left-column[
+# Histoire de Linux
+### - Unix
+### - Linux
+
+]
+.right-column-white[
+- Unix, est une famille de systèmes d'exploitation multitâche et multi-utilisateur, développé dans les années 1970. Il
+repose sur un interpréteur (le shell) avec des actions initié en** ligne de commande **.
+
+- Le noyau Linux a été créé en ** 1991 **par Linus Torvalds (Finlandais). C'est un ** logiciel libre **.
+]
+
+---
+
+layout: false
+.left-column[
+  # Histoire de Linux
+  ### - Unix
+  ### - Linux
+  ### - Logiciel Libre
+]
+.right-column-white[
+- Unix, est une famille de systèmes d'exploitation multitâche et multi-utilisateur, développé dans les années 1970. Il repose sur un interpréteur (le shell) avec des actions initié en ** ligne de commande **. 
+
+- Le noyau Linux a été créé en ** 1991 **par Linus Torvalds (Finlandais). C'est un ** logiciel libre **.
+
+- Un ** logiciel libre **est un logiciel dont l'utilisation, l'étude, la modification et la duplication par autrui pour sa diffusion sont permises, ceci afin de garantir la possibilité de ** partage **entre individus.
+]
+
+---
+
+layout: false
+.left-column[
+# Histoire de Linux
+  ### - Unix
+  ### - Linux
+  ### - Logiciel Libre
+  ### - Distribution
+
+]
+.right-column-white[
+- Unix, est une famille de systèmes d'exploitation multitâche et multi-utilisateur, développé dans les années 1970. Il repose sur un interpréteur (le shell) avec des actions initié en ** ligne de commande **. 
+
+- Le noyau Linux a été créé en ** 1991 **par Linus Torvalds (Finlandais). C'est un ** logiciel libre **.
+
+- Un ** logiciel libre **est un logiciel dont l'utilisation, l'étude, la modification et la duplication par autrui pour sa diffusion sont permises, ceci afin de garantir la possibilité de ** partage **entre individus.
+
+##Exemples de distributions Linux:
+
+- ``` RedHat ```
+- ``` CentOS ```
+- ``` Fedora ```
+- ``` Debian ```
+- ``` Ubuntu ```
+]
+
+---
+
+class: center, middle, inverse
+# Installation d'une distribution Linux
+
+---
+
+layout: false
+.left-column[
+# Notions de base
+### - Noyau Linux
+
+
+]
+.right-column-white[
+- Le noyau est le cœur du système, c'est lui qui s'occupe de fournir aux logiciels une interface de programmation pour utiliser le matériel. Le noyau Linux a été créé en 1991 par Linus Torvalds
+
+- Le noyau Linux est un noyau de système d'exploitation de type UNIX. 
+
+- Il est utilisé dans plusieurs systèmes d'exploitation dont notamment GNU/Linux (couramment appelé « Linux ») et Android. 
+
+- Le noyau Linux est un logiciel partiellement libre développé essentiellement en langage C par des milliers de bénévoles et salariés collaborant sur Internet. 
+
+- Initialement conçu pour l'architecture de processeur x86, il a ensuite été porté sur de nombreuses autres, dont m68k, PowerPC, ARM, SPARC et MIPS
+
+-  Dernière version du noyau actuelle : **5.1.3**
+]
+---
+
+layout: false
+.left-column[
+# Notions de base
+### - Noyau Linux
+### - Grub
+
+
+]
+.right-column-white[
+- GNU GRUB est un ** programme d'amorçage ** de micro-ordinateur. Il s'exécute à la mise sous tension de l'ordinateur, après les séquences de contrôle interne et avant le système d'exploitation, puisque son rôle est justement d'en organiser le chargement. Lorsque l'ordinateur héberge plusieurs systèmes (multi-boot), il permet à l'utilisateur de choisir quel système démarrer. 
+
+- C'est un ** logiciel libre **. Il permet l'amorçage de systèmes GNU/Linux ou Windows (ainsi que d'autres systèmes. tel que: FreeBSD et OpenBSD, Hurd, Solaris). 
+]
+---
+
+layout: false
+.left-column[
+# Notions de base
+### - Noyau Linux
+### - Grub
+### - Partition
+
+]
+.right-column-white[
+- En informatique, le **partitionnement d'un support de stockage** (disque dur, SSD, carte-mémoire...) est l'opération qui consiste à le diviser en partitions — ou régions dans lesquelles les systèmes d'exploitation présents sur la machine peuvent gérer leurs informations de manière séparée et privée. Chaque système d'exploitation est libre de diviser les partitions qu'il utilise de la manière qui lui convient
+
+- ** ext4 **est le successeur de ext3, principalement destiné aux systèmes basés sur GNU/Linux.
+Il gère les volumes d'une taille allant jusqu'à un exbioctet (260 octets), la fonctionnalité majeure est l'allocation par ** extent **.
+
+
+- ** Btrfs ** (B-tree file system, prononcé ButterFS) est un système de fichiers des années 2010 fondé sur le Copy-On-Write sous licence GNU GPL, développé par Oracle, Red Hat, Fujitsu, Intel, SUSE et autres. Il permet le gestion de ** Snapshot ** et de ** checksum**. Il va remplacer ext4
+]
+---
+
+layout: false
+.left-column[
+# Notions de base
+### - Noyau Linux
+### - Grub
+### - Partition
+### - Environement de bureau
+
+]
+.right-column-white[
+- GNOME, acronyme de **GNU Network Object Model Environment**, cette interface est actuellement populaire sur les systèmes GNU/Linux et fonctionne également sur la plupart des systèmes de type UNIX.
+
+- **KDE** est un projet de logiciel libre historiquement centré autour d'un environnement de bureau pour systèmes UNIX.
+]
+---
+
+layout: false
+.left-column[
+# Notions de base
+### - Noyau Linux
+### - Grub
+### - Partition
+### - Environement de bureau
+### - Utilisateurs
+]
+.right-column-white[
+- Un **user identifier** ou **UID** permet d'identifier un utilisateur sur les systèmes d'exploitation Unix et Linux. Cette technique est utilisée principalement pour les droits d'accès à des ressources ou à des domaines et donc pour la sécurité du système.
+
+- L'UID 0 est généralement associé à l'utilisateur **root**.
+
+- La Linux Standard Base spécifie que les valeurs comprises dans la plage **0 à 99** doivent être réservées pour l'allocation statique par le système, tandis que les valeurs de la plage **100 à 499** doivent être réservées pour l'allocation dynamique par les administrateurs système et les scripts de post-installation
+
+- Les UID sont référencés dans le fichier **/etc/passwd** qui liste les utilisateurs et dans le fichier **/etc/shadow (qui liste sous une forme chiffrée les mots de passe des utilisateurs).
+]
+---
+
+layout: false
+.left-column[
+# Notions de base
+### - Noyau Linux
+### - Grub
+### - Partition
+### - Environement de bureau
+### - Utilisateurs
+### - Interpreteurs
+]
+.right-column-white[
+- Un **shell Unix** est un interpréteur de commandes destiné aux systèmes d'exploitation Unix qui permet d'accéder aux fonctionnalités internes du système d'exploitation.
+
+- Les OS Unix disposent le plus souvent d'un shell. À l'origine, l'interpréteur de commandes par défaut était sh, qui donna naissance à de nombreuses variantes, dont csh, étendu en tcsh, ou ksh, ou encore rc... Mais aujourd'hui **bash**, s'inspirant de sh, ksh, et csh, est le shell le plus répandu
+
+- Il fournit une liste de commandes permettant d'opérer sur l'ordinateur.
+
+- Il permet de regrouper ces commandes dans un fichier unique appelé script.
+ 
+- Il vérifie la ligne de commande lors de son exécution ou lors d'une éventuelle procédure de vérification et renvoie un message d'erreur en cas d'erreur de syntaxe.
+
+- En cas de validation, chaque ligne de commande est interprétée par le système.
+]
+---
+
+class: center, middle, inverse
+# Commandes  de base du Bash
+
+---
+
+layout: false
+.left-column[
+# Cmds de base
+### - Files and directory  
+]
+.right-column-white[
+- **man ** 
+
+- **cd **  
+
+- **cp**  
+
+- **ls**  
+
+- **mkdir** 
+
+- **tree**  
+
+- **mv**  
+
+- **rm**  
+
+- **grep**  
+
+- **touch** 
+
+- **echo**  
+
+- **cat** 
+
+- **pwd**
+]
+---
+layout: false
+.left-column[
+# Cmds de base
+### - Files and directory
+]
+.right-column-white[
+- **man ** `Affiche le manuel d'une commande`
+
+- **cd ** `Changer de répertoire de travail`
+
+- **cp** `Permet de copier un fichier/répertoire`
+
+- **ls** `Lister le contenu d'un répertoire`
+
+- **mkdir** `Créer un répertoire`
+
+- **tree** `Affichier l'arborescence d'un répertoire`
+
+- **mv** `Déplacer un fichier/répertoire`
+
+- **rm** `Supprimer un fichier/répertoire`
+
+- **grep** `Chercher dans la sortie standard d'une commande`
+
+- **touch** `Créer un fichier`
+
+- **echo** `Afficher en sortie standard l'argument de la commande`
+
+- **cat** `Afficher en sortie standard le contenu d'un fichier`
+
+- **pwd** `Afficher le nom du répertoire de travail courant`
+]
+---
+layout: false
+.left-column[
+# Cmds de base
+### - Files and directory
+### - Pratique
+
+]
+.right-column-white[
+1. Se déplacer dans votre "Home Directory", créer un répertoire "exercices", puis créer un fichier "exo_1" dedans.
+
+2. Renomer **"exo_1"** en **"exo_1.5"** puis supprimer le fichier **exo_1**.
+
+]
+---
+layout: false
+.left-column[
+# Cmds de base
+### - Files and directory
+### - Pratique
+### - Vi
+
+]
+.right-column-white[
+- Vi est un éditeur de text présent d'office sur la majorité des systèmes Unix actuels.
+
+- Quelques commandes :
+      - ** Editer un fichier: ** `vi FICHIER`
+      - ** Mode insertion: **`i`
+      - ** Sortir du mode insertion:** `Echap`
+      - ** Copier la ligne: ** `yy`
+      - ** Copier un élément: ** `yw`
+      - ** Coller: ** `p`
+      - ** Supprimer une ligne:** `dd`
+      - ** Retour en arrière: **`u`
+      - ** Sortir du fichier sans sauvegarder:** `:q`
+      - ** Sortir du fichier en sauvegardant:** `:wq`
+      - ** Forcer une commande:** `!` à la fin
+      - ** Chercher dans le fichier: ** `/` et `n` pour la récurrence suivante
+      - ** Remplacer une string par une autre:** `:%s/tigrou/porcinet/g`
+]
+---
+layout: false
+.left-column[
+# Cmds de base
+### - Files and directory
+### - Pratique
+### - Vi
+### - Cmds
+
+]
+.right-column-white[
+- **history**: `Affiche l'historique des commandes de l'utilisateur courant`
+
+- **echo $?**: `Affiche le code retour de la précédente commande. 0 ok, 1 NOK`
+
+- **ls | grep toto**: `permet d'affeèter la sortie standard d'une commande à l'entrée standard d'une autre`
+
+- **echo toto > tata**: `copier toto dans le fichier tata et créer tata si besoin. Il éfface le fichier tata si il était déjà éxistant`
+
+- ** echo toto >> tata**: ` copier toto à la fin du fichier tata`
+
+- **echo toto && echo tata**: `Joue uniquement la commande suivant le && si les commandes précédentes ont bien terminé`
+
+]
+
+---
+layout: false
+.left-column[
+# Cmds de base
+### - Files and directory
+### - Pratique
+### - Vi
+### - Cmds
+### - Pratique
+
+]
+.right-column-white[
+1. Ecrire dans le fichier **exo_1.5** une text de 10 ligne dans lequel le mot tigrou sera présent 4 fois.
+
+2. Depuis le terminal, éxécuter une commande qui va cherche la string "tigrou" dans le fichier **exo_1.5**
+
+3. Executer une commande qui va vérifier le présence de la string **tigrou** dans le fichier **exo_1.5** et qui va par la suite ajouter le contenu de l'historique des commandes de l'utilisateur courant à la fin du fichier **exo_1.5**.
+
+4. Vérifier que la commande de la tâche 3 c'est bien terminé avec un echo.
+]
+---
+layout: false
+.left-column[
+# Cmds de base
+### - Files and directory
+### - Pratique
+### - Vi
+### - Cmds
+### - Pratique
+### - Paquets
+
+]
+.right-column-white[
+- Un gestionnaire de paquets est un (ou plusieurs) outil(s) automatisant le processus d'installation, désinstallation, mise à jour de logiciels installés sur un système informatique. Ils permettent de mettre à disposition simplement des milliers de paquetages lors d'une installation standard.
+
+- Liste non exhaustive des différents gestionnaire de paquets:
+      - dpkg (Debian, Ubuntu et autres dérivées) ;
+      - RPM (Red Hat, Fedora, Mageia et openSUSE, etc.) ;
+      - APT (Debian, Ubuntu)
+      - YUM (Fedora, RedHat, CentOs)
+      - DNF (Fedora, RedHat, CentOs)
+      - Aptitude (Ubuntu)
+
+- Exemple d'utilisation:
+ - yum update / apt-get update
+ - yum install vim / apt-get install vim
+ - yum search python / apt-cache search python
+ - yum remove vim / apt-get remove vim
+ - rpm -i elasticsearch-7.1.1-x86_64.rpm / dpkg -i *.deb
+]
+---
+
+class: center, middle, inverse
+# Fichiers
+
+---
+
+.left-column[
+# Fichiers 
+### - Droits
+
+]
+.right-column-white[
+- **Afficher les droits d'un fichier:** `ls -l`
+```remark
+drwxr-xr-x. tigrou disney 4096 May  6 15:15 Linux
+-rw-r--r--. tigrou disney   12 May  6 15:14 README.md
+```
+-    **“r”**=le droit de lire (= examiner son contenu)
+-    **“w”**=le droit d'écrire (= modifier son contenu)
+-    **“x”**=le droit d'exécuter (= exécuter le fichier si c'est un programme, ou rentrer dans un répertoire si c'est un répertoire)
+
+#### On peut, pour un utilisateur donné, représenter ses droits:
+
+-    soit par une chaine de 3 caractères “r”, “w”, “x” ainsi que “-” pour les droits qu'il n'a pas (ex: “rw-”).
+
+-    soit par un chiffre octal (0 à 7), en prenant r=4, w=2, x=1 et, bien sûr, 0 pour les droits qu'il n'a pas (ex: “rw-” = 4 + 2 + 0 = 6).
+
+]
+
+---
+
+.left-column[
+# Fichiers 
+### - Droits
+### - Cmds
+]
+.right-column-white[
+- Nomenclature de *** chmod ***: ```chmod [ugo] [+-=] [rwx] ```
+
+- Commande pour modifier les droits: ```chmod  +644 tigrou disney```
+
+- Ajout du droit d'écriture pour le groupe du fichier toto: ```chmod g+w toto```
+
+- Pour affecter l'utilisateur Tigrou au fichier toto: ```chown tigrou toto```
+]
+---
+
+.left-column[
+# Fichiers
+### - Droits
+### - Cmds
+### - Inode
+]
+.right-column-white[
+- Un ** inode ** est une structure de données contenant des informations à propos d'un fichier ou répertoire stocké.
+
+- À chaque fichier correspond un numéro d'inode, unique au périphérique sur lequel il est situé.
+
+- Chaque fichier a un seul inode, même s'il peut avoir plusieurs noms (chacun de ceux-ci fait référence au même inode). Chaque nom est appelé link.
+
+- Les inodes contiennent notamment les métadonnées des fichiers, et en particulier celles concernant les droits d'accès.
+
+- Les inodes sont créés lors de la création du système de fichiers. La quantité d'inodes (généralement déterminée lors du formatage et dépendant de la taille de la partition) indique le nombre maximum de fichiers que le système de fichierspeut contenir.
+]
+---
+.left-column[
+# Fichiers
+### - Droits
+### - Cmds
+### - Inode
+### - Lien symbolique
+
+]
+.right-column-white[
+- Un lien symbolique se comporte comme un alias d'un fichier ordinaire ou d'un répertoire. 
+
+<div class="mermaid">
+  graph LR
+  Batman-->Bruce_Wayne
+  Bruce_Wayne-->Inode
+  Inode-->Data_01101010
+</div>
+
+- Ici le fichier **Batman** et le lien symbolique de **Bruce_Wayne**.
+
+- Un cas d'usage des liens symbolique est par exemple de conserver à la fois plusieurs versions (2.1, 2.2, 2.3, etc.) d'une application.
+
+- Exemple avec **ls** représente les liens symboliques de la façon suivante : 
+```lrwxrwxrwx. 1 root root 11 May 1 15:56 python -> python2.3```
+
+
+]
+
+---
+
+.left-column[
+# Fichiers
+### - Droits
+### - Cmds
+### - Inode
+### - Lien symbolique
+### - Cmds
+]
+.right-column-white[
+- ** df -i ** ```Afficher les informations des inodes```
+
+- ** df -h ** ```Afficher les informations de l'usage des partitions```
+
+- ** ls -i ** ```Afficher les inodes des fichiers/répertoires```
+
+- ** du -sh * ** ```Afficher l'espace disque des fichiers/répertoires```
+
+- ** find / -name fichier ** ```Afficher toutes les récurences de la string "fichier" dans /```
+
+- ** locate fichier** ```Affiher toutes les récurences de la string "fichier" dans tout le système (faire la cmd updatedb pour index le system avant)```
+
+- ** ln -s bruce_wayne batman** ```Créer le lien symbolique batman du fichier bruce_wayne```
+]
+
+---
+
+.left-column[
+# Fichiers
+### - Droits
+### - Cmds
+### - Inode
+### - Lien symbolique
+### - Cmds
+
+]
+.right-column-white[
+- ** sed :** ```sed est, comme awk, un programme permettant d'appliquer différentes transformations à des données. **sed** lit des données d'entrée ligne par ligne, modifie chaque ligne selon des règles dans un langage propre, puis retourne le contenu du fichier```
+  - Exemples :  
+  ```remark
+  # Parcourir un fichier et afficher que certaines lignes.
+  sed -n '10,12p' /etc/passwd
+  # Remplacer la chaine1 par la chaine2 dans un fichier.
+  sed -e “s/chaine1/chaine2/g” file
+  ```
+  
+
+- ** awk :** ```awk principalement utilisé pour la manipulation de fichiers textuels pour des opérations de recherches, de remplacement et de transformations complexes.```
+  - Exemples :
+  ```remark
+  # Afficher uniquement la colone 3 et 9 d'une commande.
+  ls -alrth | awk -F  " " '{ print $3, $9}'
+  ```
+
+]
+
+---
+
+.left-column[
+# Fichiers
+### - Droits
+### - Cmds
+### - Inode
+### - Lien symbolique
+### - Cmds
+### - Fichier Linux
+
+]
+.right-column-white[
+- **/ :** ```La racine, elle contient les répertoires principaux ```
+
+- **/bin :** ```Contient des exécutables essentiels au système, employés par tous les utilisateurs```
+
+- **/boot :** ```Contient les fichiers permettant à Linux de démarrer```
+
+- **/dev :** ```Contient les points d'entrée des périphériques```
+
+- **/etc :** ```contient les commandes et les fichiers nécessaires à l'administrateur du système```
+
+- **/home :** ```Répertoire personnel des utilisateurs```
+
+- **/lib :** ```Contient des bibliothèques partagées essentielles au système lors du démarrage```
+
+- **/proc :** ```un répertoire factice, dont les fichiers contiennent des infos sur l'état du système et des processus en cours d'exécution.```
+]
+
+---
+
+.left-column[
+# Fichiers
+### - Droits
+### - Cmds
+### - Inode
+### - Lien symbolique
+### - Cmds
+### - Fichier Linux
+
+]
+.right-column-white[
+- **/mnt :** ```contient les points de montage des partitions temporaires (cd-rom, disquette, ...)```
+
+- **/opt :** : ```Contient des packages d'applications supplémentaires```
+
+- **/root :** ```Répertoire de l'administrateur root```
+
+- **/sbin :** ```Contient les binaires système essentiels (par exemple la commande adduser)```
+
+- **/tmp :** ```Contient les fichiers temporaires```
+
+- **/usr :** ```les logiciels installés avec le système.```
+
+- **/var :** ```Contient des données variables```
+]
+
+---
+
+.left-column[
+# Fichiers
+### - Droits
+### - Cmds
+### - Inode
+### - Lien symbolique
+### - Cmds
+### - Fichier Linux
+### - Pratique
+]
+.right-column-white[
+1. Dans votre home directory, créer un répertoire **exo_2**, puis créer un fichier portant le nom de **app_v1** et editer le fichier avec une phrase de votre choix.
+
+2. Changer les droits de **app_v1** de sorte que son propiètaire puisse écrire, lire et éxécuter ce fichier mais que son groupe et les autres ne puisse rien faire.
+
+3. Changer le propriétaire de **app_v1** pour root en tant que votre utilisateur courant.
+
+4. Créer un lien symbolique portant le nom de **app_v2** du fichier **app_1**
+
+5. Editer le fichier **app_v2** avec une phrase de votre choix.
+
+6. Afficher le contenu du fichier, que constatez-vous ?
+
+7. Afficher la taille ainsi que ses Inodes du fichier **app_v2**
+
+8. Chercher dans le système ou ce situe le fichier **cpuinfo** et indiquer le nombre de processeur disponible pour le système.
+]
+
+---
+
+class: center, middle, inverse
+# Utilisateurs et groupes
+
+---
+
+.left-column[
+# Users
+### - Fichiers
+
+]
+.right-column-white[
+- **passwd :** ```passwd est une commande  permettant à un utilisateur de changer son mot de passe. /etc/passwd est un fichier qui contenait les mots de passe.```
+
+- **shadow :** ```Le fichier /etc/shadow contient les mots de passe et l'information sur l'expiration des comptes pour les utilisateurs.```
+
+- **.profile :** ```Fichier de customisation de l'environement de travail de l'utilisateur.```
+
+- **.bashrc :** ```Aliases et fonctions utilisateur, présent dans le /home.```
+
+- **.bash_profile :** ```Environement utilisateur spécifique et programme de démmarage, présent dans le /home.```
+
+- **/etc/group :** ```Fichier qui contient la liste des groupes du système.```
+
+- **groups :** ```Commande qui affiche les groupe de l'utilisateur courant```
+]
+
+---
+
+.left-column[
+# Users
+### - Files
+### - Cmds
+
+]
+.right-column-white[
+- ** env :** ```Affiche la liste des variables d'environement courant.```
+
+- ** export :** ```Une variable de shell peut être exportée pour devenir une variable d'environnement grâce à la commande export.```
+
+- ** set :** ```La commande set sans aucun paramètre permet de lister les variables d’environnement.```
+
+- ** useradd :** ```Permet de créer un nouvelle utilisateur ou de modifier un éxistant. Commande non intéractive, utilse pour des script```
+
+- ** adduser :** ```Permet de créer un utilisateur de manière intéractife```
+
+- ** userdel :** ```Permet de supprimer un utilisateur```
+
+- ** usermod :** ```Permet de modifier un utilisateur courant.```
+
+- ** groupadd :** ```Permet de créer un nouveau groupe```
+
+- ** whoami :** ```Permet d'afficher l'utilisateur courant```
+
+- ** who :** ```Permet d'afficher les utlisateur connecté au système```
+]
+
+---
+
+.left-column[
+# Users
+### - Files
+### - Cmds
+### - pratique
+
+]
+.right-column-white[
+1. Créer un utilisateur tigrou et un disney.
+
+2. Ajouter Tigrou au groupe disney.
+
+3. Créer un aliase ll qui correspond à la commande ls -alrth pour votre utilisateur courant.
+
+4. Ajouter cette variable  au fichier .bash_profile de votre utilisateur puis charger un nouveau bash.
+
+5. Modifier le nom de l'utilistauer tigrou en grominet.
+]
+
+---
+
+class: center, middle, inverse
+# Partitionnement
+
+---
+
+.left-column[
+# Partition
+### - Disques
+
+
+]
+.right-column-white[
+- Un point de montage est un répertoire à partir duquel sont accessibles les données se trouvant sous forme d'un système de fichiers sur une partition de disque dur ou un périphérique.
+
+- Pour les disques **SCSI** ou **SATA**, la numérotation se fait avec le préfixe ***sd***, suivi par une lettre < ***a*** > pour le premier disque. < ***b*** > pour le second disque.
+
+- Pour les disques **IDE**, la numérotation se fait avec un préfixe **hd**, suivi par une lettre, <**a**>, et <**b**> pour le second...
+
+- Tout périphérique est identifié à un fichier qui se trouve dans le répertoir /dev.
+
+]
+
+---
+
+.left-column[
+# Partition
+### - Disques
+### - Cmds  
+
+
+]
+.right-column-white[
+- **fdisk -l :** ```Liste la table des partitons/disques```
+
+- **fdisk /dev/sdb  :** ```Se connecte au disque /dev/sdb pour y applique des actions```
+
+- **mkfs.ext4 /dev/sdb :** ```Crer le système de fichier ext4 sur le disque /dev/sdb```
+
+- **mount /dev/sdb /datas:** ```Monte le disque /dev/sdb dans le répertoire /datas```
+
+- **unmount /datas:** ```Démonte le répertoire /datas```
+
+- **lsblk -f :** ```Affiche les informations relatives aux disque```
+]
+---
+
+.left-column[
+# Partition
+### - Disques
+### - Cmds 
+### - Pratique  
+
+
+]
+.right-column-white[
+1. Ajouter un disque à votre VM de 10Go
+
+2. Créer une partition à ce nouveau disque.
+
+3. Initialiser le système de fichier de ce disque en ext4.
+
+4. Monter ce disque sur le répertoire /datas.
+
+5. Copier le répertoire /home/exo dans /datas.
+
+6. Redémarrer votre VM et lister for points de montages, que constatez-vous ?
+]
+
+---
+
+.left-column[
+# Partition
+### - Disques
+### - Cmds
+### - Pratique
+### - Fstab
+
+
+]
+.right-column-white[
+- ** fastab :**  ```Le fichier fstab est la table des différents systèmes de fichiers. Il contient une liste des disques utilisés au démarrage et des partitions de ces disques. Pour chaque partition, il indique comment elle sera utilisée et intégrée à l’arborescence du système de fichiers global (c'est-à-dire le point de montage). Il se trouve généralement à /etc/fstab.```
+
+- Exemple d'une entrée dans ce fichier : 
+  - ```<filesystem>```  ```<mnt>``` ```<type>```  ```<options>```      ```<dump>``` ```<pass>```
+  - /                /datas                       ext4      defaults        0 0
+
+
+- La quatrième colonne définit des options particulières pour les systèmes de fichier.
+
+- La cinquième colonne indique si le filesystème nécéssite d'être dumpé, 0= non.
+
+- Cette colonne indique la priorité de vérification du système de fichiers par l'utilitaire fsck.
+]
+
+---
+
+.left-column[
+# Partition
+### - Disques
+### - Cmds
+### - Pratique
+### - Fstab
+### - LVM
+
+]
+.right-column-white[
+- ** LVM :**  ```La gestion par volumes logiques est à la fois une méthode et un logiciel de gestion de l'utilisation des espaces de stockage d'un système. Il permet de gérer, sécuriser et optimiser de manière souple les espaces de stockage en ligne dans l'OS.```
+
+- ** Volumes physique :** ```Les disques durs, partitions de disques durs, volumes RAID ou unités logiques provenant d'un SAN forment des « volumes physiques »```
+
+- ** Groupes de volumes VG :** ```On concatène ces volumes physiques dans des « groupes de volumes » (volume groups ou VG). Ces VG sont équivalents à des pseudo-disques-durs.```
+
+- ** Volumes logiques LV :** ```Des « volumes logiques » (logical volumes ou LV) sont alors découpés dans les groupes de volumes, puis formatés et montés dans des systèmes de fichiers ou utilisés en tant que raw devices. Les LV sont équivalents à des pseudo-partitions.```
+
+- Avant d'utiliser LVM, il faut partitionner les disques (voir Outils de partitionnement) en type LVM. (fdisk)
+]
+---
+.left-column[
+# Partition
+### - Disques
+### - Cmds
+### - Pratique
+### - Fstab
+### - LVM
+### - Cmds
+
+]
+.right-column-white[
+- ** pvcreate /dev/sdc1 **  ```Associe le PVS au disque /dev/sdc1. Il est aussi possible d'associer plusieurs disque à un PVS```
+
+- ** pvdisplay :** ```Affiche les PVS du système```
+
+- ** pvremove /dev/sdc1 ** ```Supprime un pvs```
+
+- ** vgcreate vg_datas /dev/sdc1 :** ```Associe le VGS au PVS /dev/sdc1```
+
+- ** vgdisplay :** ```Affiche les VGS du système```
+
+- ** vgremove VG :** ```Supprime le volume groupe VG```
+
+- ** lvcreate -L +5G -n lv_datas vg_datas :** ```Créer un LV_datas de 5Go dans le VG vg_datas```
+
+- ** mkfs.ext4 /dev/vg_datas/lv_datas :** ``` formater le logical volume lv_datas```
+
+]
+---
+.left-column[
+# Partition
+### - Disques
+### - Cmds
+### - Pratique
+### - Fstab
+### - LVM
+### - Cmds
+### - Pratique
+
+]
+.right-column-white[
+1. Créer un PV /dev/sdb.
+
+2. Créer un VG vg_datas.
+
+3. Créer un lv lv_datas de 6Go dans le VG vg_datas.
+
+4. Montez le répertoir /datas au LV lv_datas.
+
+5. Ajouter un troisème disque à la VM et ajouter le disque au PV existant.
+
+6. Afficher les PV disponible sur le système, que remarquez-vous ?
+]
+
+---
+
+class: center, middle, inverse
+# Processus et Services
+
+---
+
+.left-column[
+# Process
+### - Notions
+
+
+]
+.right-column-white[
+- **Processus :** ```Lorsqu'un programme s’exécute, le système va créer un processus.```
+
+- **Processus enfant:** ```Un processus peut lui même créer un autre processus, il devient donc un processus parent ou père, et le nouveau processus, un processus enfant.``` 
+
+- **Signaux :** ```Un signal est un message envoyé par le noyau à un processus  . Il y en a 34. Exemple: kill -9 PID pour forcé l'arrêt d'un processus.```
+
+  - Ctrl-C Envoie un signal INT ("interrupt", SIGINT); par default il cause l'arrêt du processus courant.
+  - Ctrl-Z Envoie un signal TSTP ("terminal stop", SIGTSTP); par default il suspends le processus courant.
+
+]
+
+---
+
+.left-column[
+# Process
+### - Notions
+
+
+]
+.right-column-white[
+- **Services/Daemon :** ```Un démon désigne un processus ou un ensemble de processus qui s'exécute en arrière-plan plutôt que sous le contrôle direct d'un utilisateur.```
+
+- **Init :** ```init est le premier programme informatique exécuté. Il est exécuté comme un démon informatique et possède l'identifiant de processus (PID) 1. init est lancé par le noyau et reste actif jusqu'à ce que le système soit éteint. Il est le parent direct ou indirect de tous les autres programmes lancés.``` 
+
+- **SystemD :** ```systemd est un système d’initialisation et un daemon qui a été spécifiquement conçu pour le noyau Linux comme alternative à Init. Il a pour but d'offrir un meilleur cadre pour la gestion des dépendances entre services, de permettre le chargement en parallèle des services au démarrage, et de réduire les appels aux scripts shell.```
+
+]
+
+---
+
+.left-column[
+# Process
+### - Notions
+### - Cmds
+
+
+]
+.right-column-white[
+- **kill -9 PID :** ```Force l'arrête un processus.```
+
+- **systemctl :** ```Permet de gérer les services systemD.```
+
+- **systemctl enable application.service :** ```Active le démarrage du service au boot du système```
+
+- **systemctl --system daemon-reload :** ``` recharge du démon systemd pour applique des changements majeurs```
+
+- **service :** ```Permet de gérer les services system V.```
+
+- **ps :** ```Affiche l'ensemble des processus du système.```
+
+- **top :** ```Affiche aussi les processus du système plus des informations d'utilisation du système.```
+
+- **/etc/services :** ```Liste des services informatique avec leurs ports/protocoles.```
+
+- **strace :** ``` Trace les appels système et les signaux d'une commandeS`
+
+]
+---
+
+.left-column[
+# Process
+### - Notions
+### - Cmds
+### - Pratiques
+
+]
+.right-column-white[
+1. Déterminer le process ID de votre session BASH.
+
+2. Arrêter ce processu avec les signaux systèmes...
+
+3. Vérifier le status du service crond.
+]
+---
+
+class: center, middle, inverse
+# Scripts Bash
+
+---
+
+.left-column[
+# Scripts
+### - Shebang
+
+
+]
+.right-column-white[
+- **Shebang :** ```Le shebang, représenté par #! /bin/bash, est un en-tête d'un fichier texte qui indique au système d'exploitation que ce fichier n'est pas un fichier binaire mais un script; sur la même ligne est précisé l'interpréteur permettant d'exécuter ce script.```
+]
+---
+
+.left-column[
+# Scripts
+### - Shebang
+### - Loop
+
+
+]
+.right-column-white[
+- **Shebang :** ```Le shebang, représenté par #! /bin/bash, est un en-tête d'un fichier texte qui indique au système d'exploitation que ce fichier n'est pas un fichier binaire mais un script; sur la même ligne est précisé l'interpréteur permettant d'exécuter ce script.```
+
+- **Loop :** ```les boucles permettent de répéter autant de fois que nécessaire une partie du code.```
+  - **While :** ```(Tant que)```
+    ```remark
+    #! /bin/bash
+    while [ test ]
+    do
+    ----echo 'Action en boucle'
+    done
+    ```
+  - **For :** ```La boucle for permet de parcourir une liste de valeurs et de boucler autant de fois qu'il y a de valeurs.```
+    ```remark
+    #! /bin/bash
+    for variable in 'valeur1' 'valeur2' 'valeur3'
+    do
+    ----echo "La variable vaut $variable"
+    done
+    ```
+]
+---
+.left-column[
+# Scripts
+### - Shebang
+### - Loop
+### - Conditions
+
+
+]
+.right-column-white[
+- **Conditions :** ``` ```
+  - **If :** ```Le type de condition le plus courant est le if, qui signifie « si ».```
+    ```remark
+    #! /bin/bash
+    if [ test ]
+    then
+    ----echo "C'est vrai"
+    else
+    ----echo "C'est faux"
+    fi
+    ```
+  - **Elif :** ```Il existe aussi le mot cléelif, abréviation de « else if », qui signifie « sinon si ».```
+    ```remark
+    #! /bin/bash
+    if [ test ]
+    then
+    ----echo "Le premier test a été vérifié"
+    elif [ autre_test ]
+    then
+    ----echo "Le second test a été vérifié"
+    elif [ encore_autre_test ]
+    then
+    ----echo "Le troisième test a été vérifié"
+    else
+    ----echo "Aucun des tests précédents n'a été vérifié"
+    fi
+    ```
+]
+---
+.left-column[
+# Scripts
+### - Shebang
+### - Loop
+### - Conditions
+### - Tests
+
+
+]
+.right-column-white[
+- **Test :** ```Trois types de test bash éxistent```
+  - Des tests sur des chaînes de caractères.
+  - Des tests sur des nombres.
+  - Ses tests sur des fichiers.
+
+#Exemples de tests
+
+    - $chaine1 = $chaine2 : `Vérifie si les deux chaînes sont identiques.`
+    - $chaine1 != $chaine2 : `Vérifie si les deux chaînes sont différentes.`
+    - $num1 -eq $num2 : `Vérifie si les nombres sont égaux.`
+    - $num1 -gt $num2 : `Vérifie sinum1est supérieur ( > ) ànum2(greaterthan).`
+    - -e $nomfichier : `Vérifie si le fichier existe.`
+    - -L $nomfichier : `Vérifie si le fichier est un lien symbolique`
+]
+---
+
+.left-column[
+# Scripts
+### - Shebang
+### - Loop
+### - Conditions
+### - Tests
+
+]
+.right-column-white[
+- **Plusieurs tests à la fois :** ```Dans if, il est possible de faire plusieurs tests à la fois.```
+  - Si un test est vrai **ET** qu'un autre test est vrai. (** && **signifie « et »)
+  - Si un test est vrai **OU** qu'un autre test est vrai. (**||** signifie « ou »)
+    ```remark 
+    #!/bin/bash
+    if [ $1 = 'chien' ] && [ $i -ge 5  ]
+    then
+    ----echo "ça marche"
+    else
+    ----echo "ça marche pas"
+    fi
+    ```
+]
+---
+.left-column[
+# Scripts
+### - Shebang
+### - Loop
+### - Conditions
+### - Tests
+### - Fonctions
+
+]
+.right-column-white[
+- **Plusieurs tests à la fois :** ```Une fonction, c’est un ensemble d’instructions, permettant d'effectuer plusieurs tâches avec des paramètres d'entrée différents.```
+  - En Bash, il y a deux manières pour déclarer une fonction. 
+  ```remark
+  maFonction ()
+  {
+    bloc d’instructions
+  }
+  *** Appel de la fonction:
+  maFonction
+  ```
+  OU
+  ```remark
+  function maFonction
+  {
+  bloc d’instructions 
+  }
+   *** Appel de la fonction:
+  maFonction
+  ```
+]
+
+---
+.left-column[
+# Scripts
+### - Shebang
+### - Loop
+### - Conditions
+### - Tests
+### - Fonctions
+### - Variables
+
+]
+.right-column-white[
+- **variable :** ```Les variables nous permettent de stocker temporairement des informations en mémoire.```
+  ```remark
+  Exemples de déclaration de variables dans un script.
+  date = date '+%Y_%m_%d'
+  file = $1
+  ```
+]
+
+---
+.left-column[
+# Scripts
+### - Shebang
+### - Loop
+### - Conditions
+### - Tests
+### - Fonctions
+### - Variables
+### - cron
+
+]
+.right-column-white[
+- **Cron :** ```cron est un programme qui permet aux utilisateurs d’exécuter automatiquement des scripts, des commandes ou des logiciels à une date et une heure spécifiées à l’avance, ou selon un cycle défini à l’avance.```
+- **/etc/crontab :** ``` ```
+  ```remark
+  Exemple d'entrée cron: 
+  Tous les jours à 23:30
+  30 23 * * * ./home/scripts/backup.sh
+  ```
+]
+---
+
+.left-column[
+# Scripts
+### - Shebang
+### - Loop
+### - Conditions
+### - Tests
+### - Fonctions
+### - Variables
+### - cron
+### - Pratique
+
+]
+.right-column-white[
+1. Créer un script bash qui va afficher les informations relative au système, l'utilisation des systèmes de fichier, l'uptime su serveur, les utilisateurs connecté au serveur.
+
+2. Ajouter à ce script le top 5 des processus classé par utilisation mémoire.
+
+3. Ajouter des conditions aux différents éléments pour réparer si besoin et écrire dans un fichier de log si une action à eu lieu.
+]
+---
+class: center, middle, inverse
+# See you !
+---
+    </textarea>
+    <script src="./remark-latest.min.js"></script>
+    <script>
+      var slideshow = remark.create({
+          highlightStyle: 'monokai',
+          highlightLanguage: 'remark',
+          highlightLines: true
+      });
+    </script>
+    <script src="./mermaid.min.js"></script>
+    <link rel="stylesheet" href="./mermaid.css">
+    <script>mermaid.initialize({startOnLoad:true})
+      </script>
+  </body>
+</html>

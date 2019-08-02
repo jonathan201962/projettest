@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Formation Linux Réseau</title>
+  <meta charset="utf-8">
+  <style>
+    @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+    @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+    @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+    body {
+      font-family: 'Droid Serif';
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: 'Yanone Kaffeesatz';
+      font-weight: 400;
+      margin-bottom: 0;
+    }
+
+    .remark-slide-content h1 {
+      font-size: 3em;
+    }
+
+    .remark-slide-content h2 {
+      font-size: 2em;
+    }
+
+    .remark-slide-content h3 {
+      font-size: 1.6em;
+    }
+
+    .footnote {
+      position: absolute;
+      bottom: 3em;
+      color: #B4045F
+    }
+
+    li p {
+      line-height: 1.25em;
+    }
+
+    .red {
+      color: #fa0000;
+    }
+
+    .large {
+      font-size: 2em;
+    }
+
+    a,
+    a>code {
+      color: rgb(249, 38, 114);
+      text-decoration: none;
+    }
+
+    code {
+      background: #e7e8e2;
+      border-radius: 5px;
+    }
+
+    .remark-code,
+    .remark-inline-code {
+      font-family: 'Ubuntu Mono';
+    }
+
+    .remark-code-line-highlighted {
+      background-color: #373832;
+    }
+
+    .pull-left {
+      float: left;
+      width: 47%;
+    }
+
+    .pull-right {
+      float: right;
+      width: 47%;
+    }
+
+    .pull-right~p {
+      clear: both;
+    }
+
+    #slideshow .slide .content code {
+      font-size: 0.8em;
+    }
+
+    #slideshow .slide .content pre code {
+      font-size: 0.9em;
+      padding: 15px;
+    }
+
+    .inverse {
+      background: #272822;
+      color: #777872;
+      text-shadow: 0 0 20px #333;
+    }
+
+    .inverse h1,
+    .inverse h2 {
+      color: #f3f3f3;
+      line-height: 0.8em;
+    }
+
+    /* Slide-specific styling */
+    #slide-inverse .footnote {
+      bottom: 12px;
+      left: 20px;
+    }
+
+    #slide-how .slides {
+      font-size: 0.9em;
+      position: absolute;
+      top: 151px;
+      right: 140px;
+    }
+
+    #slide-how .slides h3 {
+      margin-top: 0.2em;
+    }
+
+    #slide-how .slides .first,
+    #slide-how .slides .second {
+      padding: 1px 20px;
+      height: 90px;
+      width: 120px;
+      -moz-box-shadow: 0 0 10px #777;
+      -webkit-box-shadow: 0 0 10px #777;
+      box-shadow: 0 0 10px #777;
+    }
+
+    #slide-how .slides .first {
+      background: #fff;
+      position: absolute;
+      top: 20%;
+      left: 20%;
+      z-index: 1;
+    }
+
+    #slide-how .slides .second {
+      position: relative;
+      background: #fff;
+      z-index: 0;
+    }
+
+    /* Two-column layout */
+    .left-column {
+      color: #777;
+      width: 20%;
+      height: 92%;
+      float: left;
+    }
+
+    .left-column h2:last-of-type,
+    .left-column h3:last-child {
+      color: #B4045F;
+    }
+
+    .right-column {
+      width: 75%;
+      color: #B4045F;
+      float: right;
+      padding-top: 1em;
+    }
+
+    .right-column-white {
+      width: 80%;
+      color: #696969;
+      float: right;
+      padding-top: 1em;
+    }
+  </style>
+</head>
+
+<body>
+  <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+---
+
+# Formation Linux Réseau
+.footnote[vincent.alcouffe@posteo.net]
+
+---
+
+layout: false
+class: left, left, inverse
+.left-column[
+# Sommaire
+]
+.right-column[
+- Nations
+- Modèle OSI
+- Adresse IP
+- Trame IP
+- protocoles
+- Equipements réseaux
+- routage
+- tester les réseaux
+- Résolution de noms d'hôte
+- DNS
+- DHCP
+- VLAN
+]
+
+---
+
+class: center, middle, inverse
+# Notions
+
+---
+
+layout: false
+.left-column[
+# Notions
+### - Réseaux
+]
+.right-column-white[
+
+- **Le réseau Internet**: est le réseau permettant la communication entre différents ordinateurs/servers . Quand un ordinateur est connecté à ce réseau, on dit qu'il a accès à Internet.
+
+- **Le World Wide Web**: (web), est l'ensemble des sites Web présents sur le réseau Internet. accessible grâce à notre navigateur Web (Firefox, Chrome, ...).
+
+- **Internet**: c'est l'ensemble des nœuds (connexions, câbles, etc) entre les machines qui nous donnent accès au web et à d'autres type de services (protocoles réseaux, SMTP, IMAP...). 
+
+- **Réseau local**: Un réseau local, souvent désigné par l'acronyme anglais LAN de Local Area Network. Est un réseaux qui n'a pas accès a internet et permet d'interconnecter des appareils entre eux pour procéder à une communication.
+
+- **Réseau étendu**: Souvent désigné par son acronyme anglais WAN (Wide Area Network), est un réseau informatique couvrant une grande zone géographique, typiquement à l'échelle d'un pays, continent... Le plus grand WAN est le réseau Internet.
+]
+
+---
+
+layout: false
+.left-column[
+# Notions
+### - Réseaux
+### - Câbles
+]
+.right-column-white[
+- Les câbles sont des liaisons physiques entre ordinateurs. Mais il en existe différentes sortes, nous allons en voir 2 principales.
+
+- **Câble Ethernet**: Apellé RJ45, Il existe deux types de câble Ethernet : les droits, croisés. Ces derniers permettent de relier entre eux deux ordinateurs alors que les câbles droits servent à relier un ordinateur à un autre appareil comme un switch. De plus il y a différente catégories de câbles,  les **CAT 5** (mégabits)** et les **CAT 6 (gigabits)**.
+
+  ![alt text](pictures/droit_croise.png "droit_croise")
+
+]
+
+---
+layout: false
+.left-column[
+# Notions
+### - Réseaux
+### - Câbles
+### - Sans Fils
+]
+.right-column-white[
+
+- Le Wi-Fi, est un ensemble de protocoles de communication sans fil régis par les normes du groupe IEEE 802.11 (ISO/CEI 8802-11). Un réseau Wi-Fi permet de relier par ondes radio plusieurs appareils informatiques (ordinateur, routeur, smartphone, etc.) au sein d'un réseau afin de permettre la transmission de données entre eux.
+
+- Il y a différents norme de Wi-FI, dont la dernière qui devrait sortir cette année est la: **802.11ay**. (débits pouvant atteindre jusqu'à 100 Gb/s théorique)
+
+![alt text](pictures/wifi.jpg "wifi")
+
+]
+---
+
+layout: false
+.left-column[
+# Notions
+### - Réseaux
+### - Câbles
+### - Sans Fil
+### - Fibre Optique
+]
+.right-column-white[
+
+- Une fibre optique est un fil dont l’âme, très fine, en verre ou en plastique, a la propriété de conduire la lumière et sert pour la fibroscopie, l'éclairage ou la transmission de données numériques. Elle offre un débit d'information nettement supérieur à celui des câbles coaxiaux.
+
+- Entourée d'une gaine protectrice, la fibre optique peut être utilisée pour conduire de la lumière entre deux lieux distants de plusieurs centaines, voire milliers, de kilomètres.
+
+]
+---
+
+layout: false
+.left-column[
+# Notions
+### - Réseaux
+### - Câbles
+### - Sans Fil
+### - Fibre Optique
+### - Carte Réseau
+]
+.right-column-white[
+
+- Communément appelé **"interface"**, elle possède une adresse MAC (adresse physique de la carte, numéro d'identification unique attribué à ça fabrication). Elle permet d'identifier la machine dans un réseau.
+
+![alt text](pictures/carte.jpg "Interface")
+]
+---
+class: center, middle, inverse
+# Modèle OSI
+---
+
+layout: false
+.left-column[
+# OSI
+### - Modèle
+
+]
+.right-column-white[
+
+- Le modèle OSI (Open Systems Interconnection) est une norme de communication, en réseau, de tous les systèmes informatiques. C'est un modèle de communications entre ordinateurs proposé par l'ISO (International Organization for Standardization qui décrit les fonctionnalités nécessaires à la communication et l'organisation de ces fonctions.
+
+![alt text](pictures/osi.png "Modèle OSI")
+]
+
+---
+
+layout: false
+.left-column[
+# OSI
+### - Modèle
+### - Couches
+
+]
+.right-column-white[
+
+- ** Couche 1: ** physique.
+```remark
+"Role :"offrir un support de transmission pour la communication.
+"Materiel associé :"le hub.
+```
+- ** Couche 2: ** liaison de données.
+```remark
+"Role :"connecter les machines entre elles sur un réseau local.
+"Rôle secondaire :" detecter les erreurs de transmission.
+"Materiel associé :"le switch.
+```
+- ** Couche 3: ** Réseau
+```remark
+"Rôle :" interconnecter les réseaux entre eux.
+"Rôle secondaire :" fragmenter les paquets.
+"Matériel associé :" le routeur.
+```
+- ** Couche 4: ** Transport
+```remark
+"Rôle :" c’est la couche qui permet l’ouverture et la fermeture des sessions, elle permet la synchonicité de l’échange de données.
+```
+]
+
+---
+
+layout: false
+.left-column[
+# OSI
+### - Modèle
+### - Couches
+
+]
+.right-column-white[
+
+- ** Couche 5: ** physique.
+```remark
+"Role :"La couche présentation, c’est celle qui va, si besoin il y a, transformer les données transmises, en données interprétées, le chiffrement ou le déchiffrement par exemple.
+```
+- ** Couche 6: ** Présentation
+```remark
+"Role :"Cette couche va, si besoin il y a, transformer les données transmises, en données interprétées, le chiffrement ou le déchiffrement par exemple.
+```
+- ** Couche 7: ** Application
+```remark
+"Role :"Elle est là pour représenter les applications pour lesquelles nous allons mettre en œuvre des communications.
+"Matériel associé :" proxy.
+```
+]
+
+---
+
+layout: false
+.left-column[
+# OSI
+### - Modèle
+### - Couches
+### - Normes
+
+]
+.right-column-white[
+
+
+| **N°**        | **Couches**     | **Normes**       |
+| ------------- |: -------------: | ---------:       |
+| 7             | Application     | ```WEB        ```|
+| 6             | Présentation    | ```HTML       ```|
+| 5             | Session         | ```HTTP/HTTPS ```|
+| 4             | Transport       | ```TCP        ```|
+| 3             | Réseau          | ```IP         ```|
+| 2             | Liaison         | ```Ethernet   ```|
+| 1             | Physique        | ```RJ45       ```|
+]
+
+---
+class: center, middle, inverse
+# Adresse IP
+---
+
+layout: false
+.left-column[
+# Adresse IP
+### - Structure
+
+]
+.right-column-white[
+- Chaque ordinateur sur Internet possède une adresse IP unique.
+
+- Chaque paquet envoyé sur le réseau Internet possède ladresse IP de lordinateur expéditeur et ladresse IP de lordinateur destinataire.
+
+- Une adresse IP est composée de 32 bits, exprimée en décimale avec 4 nombres de 0 à 255.
+
+- Deux type d'adrese Ip, **IPV4** (longue de 32 bits) et **IPV6** (longue de 128 bits)
+
+    - Exemple IPV4: ```192.168.28.34```
+
+    - ```192.168.28```= N° du reseau
+    - ```.34 ```= N° de l'ordinateur
+
+    - Exemple IPV6: ```2001:0db8:0000:85a3:0000:0000:ac1f:8001```
+]
+---
+
+layout: false
+.left-column[
+# Adresse IP
+### - Structure
+### - Type
+]
+.right-column-white[
+- Adresse IPV4 **Privé**
+  - ```10.0.0.0 à 10.255.255.255```
+  - ```172.16.0.0 à 172.31.255.255```
+  - ```192.168.1.0 à 192.168.255.255```
+
+- Adresse IPV4 **Public**
+  - Tout le reste
+  - Une adresse IP publique est unique dans le monde
+
+- Exceptions
+  - ```127.0.0.1``` --> réservé pour les tests de boucle locale
+  - ```0.0.0.0  ```--> utilisé notamment pour définir une route par défaut sur un routeur
+
+]
+
+---
+
+layout: false
+.left-column[
+# Adresse IP
+### - Structure
+### - Type
+### - Masque
+]
+.right-column-white[
+- Les adresses IPv4 sont composées de deux parties : le sous-réseau et l'hôte.
+
+- Un masque de sous-réseau est un masque distinguant les bits d'une adresse IPv4 utilisés pour identifier le sous-réseau de ceux utilisés pour identifier l'hôte. L'adresse du sous-réseau est obtenue en appliquant l'opérateur **ET** binaire entre l'adresse IPv4 et le masque de sous-réseau.
+
+- La « notation CIDR » (Classless Inter-Domain Routing) donne le numéro du réseau suivi par un (« / ») et le nombre de bits à 1 dans la notation binaire du masque de sous-réseau.
+
+
+]
+
+
+---
+
+layout: false
+.left-column[
+# Adresse IP
+### - Structure
+### - Type
+### - Masque
+]
+.right-column-white[
+- Liste des masques de sous-réseauxx
+
+| **** |||| **Bits Dispo** | **Masque ** |||| **Hôtes** |
+| --- |||| -------------- | --------------- |||| ---------- |
+| /19 |||| 13 | 255.255.224.0 |||| 213-2 = 8 190 |
+| /20 |||| 12 | 255.255.240.0 |||| 212-2 = 4 094 |
+| /21 |||| 11 | 255.255.248.0 |||| 211-2 = 2 046 |
+| /23 |||| 9 | 255.255.254.0 |||| 29-2 = 510 |
+| /24 |||| 8 | 255.255.255.0 |||| 28-2 = 254 |
+| /25 |||| 7 | 255.255.255.128 |||| 27-2 = 126 |
+| /26 |||| 6 | 255.255.255.192 |||| 26-2 = 62 |
+| /27 |||| 5 | 255.255.255.224 |||| 25-2 = 30 |
+| /28 |||| 4 | 255.255.255.240 |||| 24-2 = 14 |
+| /29 |||| 3 | 255.255.255.248 |||| 23-2 = 6 |
+| /30 |||| 2 | 255.255.255.252 |||| 22-2 = 2 |
+| /31 |||| 1 | 255.255.255.254 |||| 21=2 |
+| /32 |||| 0 | 255.255.255.255 |||| 20=1 |
+]
+
+---
+
+layout: false
+.left-column[
+# Adresse IP
+### - Structure
+### - Type
+### - Masque
+### - Passerelle
+]
+.right-column-white[
+- En informatique, une passerelle (Gateway) est le nom générique d'un dispositif permettant de relier deux réseaux informatiques de types différents, par exemple un réseau local et le réseau Internet. Ainsi, un répéteur est une passerelle de niveau 1, un pont une passerelle de niveau 2 et un relais, souvent appelé routeur, une passerelle de niveau 3.
+
+- ![alt text](pictures/passerelle.png "Passerelle")
+]
+
+---
+
+class: center, middle, inverse
+# Trame IP
+
+---
+
+layout: false
+.left-column[
+# Trame IP
+### - Structure
+
+]
+.right-column-white[
+- l’entête du paquet, généralement d’une taille de 20 octets, constitue le PCI du protocole. C’est là que sont inscrites toutes les informations du protocole (adresse, segmentation, options, etc.).
+
+- la partie « data », ou champ de données, d’une taille maximum de : (65536 octets) – (les octets d’entête et d’options). Elle véhicule la PDU de couche supérieure (généralement un segment TCP ou UDP).
+
+- ![alt text](pictures/trame.png "Trame")
+]
+
+---
+
+class: center, middle, inverse
+# Protocoles
+
+---
+
+layout: false
+.left-column[
+# Protocole
+### - Braodcast
+
+]
+.right-column-white[
+- Les protocoles de communications réseau prévoient une méthode simple pour diffuser des données à plusieurs machines en même temps (multicast). Au contraire d'une communication « Point à Point » (unicast), il est possible d'adresser des paquets de données à un ensemble de machines d'un même réseau uniquement par des adresses spécifiques qui seront interceptées par toutes les machines du réseau ou sous-réseau.
+
+- Ces paquets sont en général utilisés dans un environnement LAN pour atteindre une machine dont on ne connaît pas l'adresse MAC 
+
+- Par exemple, IPv4, une adresse IP de diffusion telle que 192.168.1.255 sera interceptée par toutes les machines ayant une adresse IP entre 192.168.1.1 et 192.168.1.254, pour autant que le masque de sous-réseau de l'interface soit défini comme 255.255.255.0.
+
+- ![alt text](pictures/broadcast.png "Broasdcast")
+]
+
+---
+
+layout: false
+.left-column[
+# Protocole
+### - Braodcast
+### - UDP
+
+]
+.right-column-white[
+- Le User Datagram Protocol (UDP) est un des principaux protocoles de télécommunication utilisés par Internet. Il fait partie de la couche transport du modèle OSI, quatrième couche de ce modèle, comme TCP.
+
+- Le protocole UDP est un protocole non orienté connexion de la couche transport du modèle TCP/IP. Ce protocole est très simple étant donné qu'il ne fournit pas de contrôle d'erreurs (il n'est pas orienté connexion...).
+
+]
+
+---
+
+layout: false
+.left-column[
+# Protocole
+### - Braodcast
+### - UDP
+### - TCP
+
+]
+.right-column-white[
+- Transmission Control Protocol (littéralement, « protocole de contrôle de transmissions »), abrégé TCP, est un protocole de transport fiable, en mode connecté.
+
+- Une session TCP fonctionne en trois phases :
+
+  - l'établissement de la connexion.
+  - les transferts de données.
+  - la fin de la connexion.
+]
+
+---
+
+layout: false
+.left-column[
+# Protocole
+### - Braodcast
+### - UDP
+### - TCP
+### - ICMP
+]
+.right-column-white[
+- Internet Control Message Protocol est l’un des protocoles fondamentaux constituant la suite des protocoles Internet. Il est utilisé pour véhiculer des messages de contrôle et d’erreur pour cette suite de protocoles, par exemple lorsqu’un service ou un hôte est inaccessible.
+]
+
+---
+
+layout: false
+.left-column[
+# Protocole
+### - Braodcast
+### - UDP
+### - TCP
+### - ICMP
+### - ARP
+]
+.right-column-white[
+- L’Address Resolution Protocol (ARP, protocole de résolution d’adresse) est un protocole utilisé pour traduire une adresse de protocole de couche réseau (typiquement IPv4) en une adresse de protocole de couche de liaison (typiquement une adresse MAC). 
+
+- Il se situe à l’interface entre la couche réseau (couche 3 du modèle OSI) et la couche de liaison (couche 2 du modèle OSI).
+
+- ![alt text](pictures/arp.png "Arp")
+]
+
+---
+
+class: center, middle, inverse
+# Equipements Réseau
+
+---
+
+layout: false
+.left-column[
+# Devices
+### - Hub
+
+]
+.right-column-white[
+- Un hub Ethernet ou concentrateur Ethernet est un appareil informatique permettant de concentrer les transmissions Ethernet de plusieurs équipements sur un même support dans un réseau informatique local.
+
+- Ce dispositif est un répéteur de données ne permettant pas de protection particulière des données et transmettant les trames à toutes les machines connectées. Ceci le rend vulnérable aux attaques par Analyseur de paquets.
+
+- ![alt text](pictures/hub.jpg "Hub")
+]
+
+---
+layout: false
+.left-column[
+# Devices
+### - Hub
+### - Switch
+
+]
+.right-column-white[
+- Un commutateur réseau (en anglais switch), est un équipement qui relie plusieurs segments (câbles ou fibres) dans un réseau informatique et de télécommunication et qui permet de créer des circuits virtuels.
+
+- Contrairement à un Hub, un commutateur ne reproduit pas sur tous les ports chaque trame qu'il reçoit : il sait déterminer sur quel port il doit envoyer une trame, en fonction de l'adresse de destination de cette trame.
+
+- ![alt text](pictures/switch.jpg "Switch")
+]
+
+---
+layout: false
+.left-column[
+# Devices
+### - Hub
+### - Switch
+### - Routeur
+]
+.right-column-white[
+- Un routeur est un équipement réseau informatique assurant le routage des paquets. Son rôle est de faire transiter des paquets d'une interface réseau vers une autre, au mieux, selon un ensemble de règles.
+
+- ![alt text](pictures/routeur.jpg "Routeur")
+]
+
+---
+layout: false
+.left-column[
+# Devices
+### - Hub
+### - Switch
+### - Routeur
+### - Pare-Feu
+]
+.right-column-white[
+- Un pare-feu (Firewall) est un logiciel et/ou un matériel permettant de faire respecter la politique de sécurité du réseau, celle-ci définissant quels sont les types de communications autorisés sur ce réseau informatique. Il surveille et contrôle les applications et les flux de données à travers des règles sur les protocoles et ports.
+
+- ![alt text](pictures/parefeu.png "PareFeu")
+
+- Exemple de pare-feu software : PFsense, Iptables
+]
+
+---
+layout: false
+.left-column[
+# Devices
+### - Hub
+### - Switch
+### - Routeur
+### - Pare-Feu
+### - Proxy
+]
+.right-column-white[
+- Un proxy est un composant logiciel informatique qui joue le rôle d'intermédiaire en se plaçant entre deux hôtes pour faciliter ou surveiller leurs échanges. un proxy est un programme servant d'intermédiaire pour accéder à un autre réseau, généralement internet. Par extension, on appelle aussi « proxy » un matériel comme un serveur mis en place pour assurer le fonctionnement de tels services.
+
+- Il utilise des whites/blacks lists concernant les noms de domaines et/ou IP.
+
+- ![alt text](pictures/proxy.png "proxy")
+
+- Exemple de pare-feu software : **Squid**.
+]
+
+---
+layout: false
+.left-column[
+# Devices
+### - Hub
+### - Switch
+### - Routeur
+### - Pare-Feu
+### - Proxy
+### - DMZ
+]
+.right-column-white[
+- Une zone démilitarisée, ou DMZ (demilitarized zone) est un sous-réseau séparé du réseau local et isolé de celui-ci et d'Internet (ou d'un autre réseau) par un pare-feu. Ce sous-réseau contient les machines étant susceptibles d'être accédées depuis Internet, et qui n'ont pas besoin d'accéder au réseau local.
+
+- Les services susceptibles d'être accédés depuis Internet seront situés en DMZ, et tous les flux en provenance d'Internet sont redirigés par défaut vers la DMZ par le firewall. Le pare-feu bloquera donc les accès au réseau local à partir de la DMZ pour garantir la sécurité. En cas de compromission d'un des services dans la DMZ, le pirate n'aura accès qu'aux machines de la DMZ et non au réseau local.
+
+- ![alt text](pictures/dmz.png "DMZ")
+]
+
+---
+
+layout: false
+.left-column[
+# Devices
+### - Hub
+### - Switch
+### - Routeur
+### - Pare-Feu
+### - Proxy
+### - DMZ
+### - LB
+]
+.right-column-white[
+- En informatique, la répartition de charge (load balancing) est un ensemble de techniques permettant de distribuer une charge de travail entre différents ordinateurs d'un groupe. Ces techniques permettent à la fois de répondre à une charge trop importante d'un service en la répartissant sur plusieurs serveurs, et de réduire l'indisponibilité potentielle de ce service que pourrait provoquer la panne logicielle ou matérielle d'un unique serveur.
+
+- Ces techniques sont par exemple très utilisées dans le domaine des services HTTP où un site à forte audience doit pouvoir gérer des centaines de milliers de requêtes par seconde.
+
+- ![alt text](pictures/lb.png "LB")
+]
+
+---
+
+class: center, middle, inverse
+# Routage
+
+
+---
+layout: false
+.left-column[
+# Routage
+### - Routage
+
+]
+.right-column-white[
+- Le routage est le mécanisme par lequel des chemins sont sélectionnés dans un réseau pour acheminer les données d'un expéditeur jusqu'à un ou plusieurs destinataires. Sa performance est importante dans les réseaux décentralisés, c'est-à-dire où l'information n'est pas distribuée par une seule source, mais échangée entre des agents indépendants. C’est grâce à ça que par exemple les mails sont envoyés aux bons destinataires.
+
+- L'équipement réseaux qui s'occupe de cette tâche est le routeur.
+
+]
+
+---
+layout: false
+.left-column[
+# Routage
+### - Routage
+### - Tables de routage
+]
+.right-column-white[
+- Une table de routage est une structure de données utilisée par un routeur ou un ordinateur en réseau et qui associe des préfixes à des moyens d'acheminer les trames vers leur destination.
+
+- La table de routage contient :
+
+  - ```les adresses du routeur lui-même,```
+  - ```les adresses des sous-réseaux auxquels le routeur est directement connecté,```
+  - ```les routes statiques, c'est-à-dire configurées explicitement par l'administrateur,```
+  - ```les routes dynamiques, apprises par des protocoles de routage dynamique comme BGP, OSPF, IS-IS, etc.```
+  - ```une route par défaut.```
+
+- Un ordinateur connecté à un réseau local connaîtra typiquement la route directement connectée (le sous-réseau) et une route par défaut vers le routeur du sous-réseau. Un routeur de la default-free zone d'Internet disposera de plusieurs centaines de milliers de routes dynamiques, et pas de route par défaut.
+]
+
+---
+layout: false
+.left-column[
+# Routage
+### - Routage
+### - Tables de routage
+]
+.right-column-white[
+
+- ![alt text](pictures/tablederoutage.png "Table De Routage")
+
+- Dans un protocole de routage, la métrique est une mesure de la « distance » qui sépare un routeur d'un réseau de destination.
+
+Elle peut correspondre :
+
+- Au nombre de sauts IP nécessaires pour atteindre le réseau destination.
+
+- A un coût numérique qui dépend de la bande passante des liens franchis.
+
+- Commande Linux pour gérer le routage d'un serveur: **route -n**
+]
+
+---
+
+class: center, middle, inverse
+# DNS
+
+---
+layout: false
+.left-column[
+# DNS
+### - Résolution de noms 
+
+]
+.right-column-white[
+- Le Domain Name System, abrégé **DNS**, qu'on peut traduire en « système de noms de domaine », est le service informatique distribué utilisé pour traduire les noms de domaine Internet en adresse IP.
+
+- Pour faciliter l'accès aux hôtes sur un réseau IP, un mécanisme a été mis en place pour associer un nom à une adresse IP.
+
+- ![alt text](pictures/domaine.png "Domaine")
+ 
+- Les noms de domaine peuvent en effet avoir différent TLD (top level domain), différentes extensions, comme par exemple « .com », « .net », « .fr » …
+
+- Il a 13 autorités de noms, chacune pouvant avoir plusieurs serveurs racines (si vous êtes curieux, il y a environ 200 serveurs racines en réalité). C’est 13 autorités de noms sont gérées par 12 organisations différentes, 9 sont ricaines, 2 sont européennes, et la dernière est japonaise.
+
+- **bind**: Est un serveur DNS Linux.
+]
+
+---
+layout: false
+.left-column[
+# DNS
+### - Résolution de noms
+### - Type d'enregistrement
+]
+.right-column-white[
+- Enregistrement **A** :
+    - ```permettent de relier un nom de domaine ou un sous-domaine à l’adresse IP d’un serveur.```
+    - exemple: ```monsite.fr``` et ``` www.monsite.fr```
+  
+- Enregistrement **CNAME**: 
+    - ```L’enregistrement CNAME indique que le nom de domaine est un alias d’un autre nom de domaine```
+    - exemple: ```ftp.monsite.fr```
+
+- Enregistrement **MX**:
+    - ```MX est l’abréviation de Mail Exchange. Cet enregistrement DNS est différent des autres. L’enregistrement MX est utilisé pour diriger les emails envoyés aux adresses personnalisées associées à un nom de domaine.```
+
+- Enregistrement **PTR**:
+    - ```PTR : fait correspond une IP à un nom d'hôte. Il n'est utilisé que dans le cas d'une```
+]
+
+---
+
+layout: false
+.left-column[
+# DNS
+### - Résolution de noms
+### - Type d'enregistrement
+### - Registar
+]
+.right-column-white[
+- Un registraire de nom de domaine (registrar) est une société ou une association gérant la réservation de noms de domaine Internet, dans les domaines de premier niveau où il n'y a pas de vente directe pour le registre de noms de domaine.
+
+- Une fois un nom de domaine déposé auprès d'un registrar, on peut vouloir transférer l'enregistrement vers un autre registrar. Lors de cette procédure, les informations relatives à la traduction nom de domaine-adresse IP sont conservées pendant le transfert : tout risque d'interruption de service est donc évité.
+
+- Whois (« qui est ? ») est un service de recherche fourni par les registres Internet, les registres de noms de domaine permettant d'obtenir des informations sur une adresse IP ou un nom de domaine.
+]
+
+---
+layout: false
+.left-column[
+# DNS
+### - Résolution de noms
+### - Type d'enregistrement
+### - Registar
+### - Commandes
+]
+.right-column-white[
+- Sur Linux les DNS du serveur sotn dans le fichier : /etc/resolv.conf.
+- ```dig```: Permet d’interroger des serveurs DNS et de diagnostiquer les dysfonctionnements dans la résolution de nom. Exemple **dig www.monsite.com**
+
+- ```host```: Affiche l'ip d'un nom ou l'inverse. Exemple: host www.monsite.fr.
+
+- ```nslookup```: (Name System Look Up) est un outil permettant d'interroger un serveur de noms afin d'obtenir les informations concernant un domaine ou un hôte et permet ainsi de diagnostiquer les éventuels problèmes de configuration du DNS.
+
+]
+
+---
+class: center, middle, inverse
+# DHCP
+
+---
+
+layout: false
+.left-column[
+# DHCP
+### Fonctionnement
+]
+.right-column-white[
+- Dynamic Host Configuration Protocol (DHCP, protocole de configuration dynamique des hôtes) est un protocole réseau dont le rôle est d’assurer la configuration automatique des paramètres IP d’une station ou d'une machine, notamment en lui attribuant automatiquement une adresse IP et un masque de sous-réseau. DHCP peut aussi configurer l’adresse de la passerelle par défaut, des serveurs de noms DNS et des serveurs de noms NBNS (connus sous le nom de serveurs WINS sur les réseaux de la société Microsoft).
+
+- Le serveur DHCP élabore un datagramme d’accusé de réception (DHCP ACK pour acknowledgement) qui assigne au client l’adresse IP et son masque de sous-réseau, la durée du bail de cette adresse.
+
+- ![alt text](pictures/dhcp.png "dhcp")
+]
+
+---
+class: center, middle, inverse
+# VLAN
+
+---
+
+layout: false
+.left-column[
+# VLAN
+### Fonctionnement
+]
+.right-column-white[
+- Un réseau local virtuel, communément appelé VLAN (pour Virtual LAN), est un réseau informatique logique indépendant. De nombreux VLAN peuvent coexister sur un même commutateur réseau.
+
+- Améliorer la gestion du réseau.
+
+- Optimiser la bande passante.
+
+- Séparer les flux.
+
+- Segmentation : réduire la taille d'un domaine de broadcast.
+
+- Sécurité : permet de créer un ensemble logique isolé pour améliorer la sécurité. Le seul moyen pour communiquer entre des machines appartenant à des VLAN différents est alors de passer par un routeur.
+
+
+]
+
+---
+
+layout: false
+.left-column[
+# VLAN
+### Fonctionnement
+### 
+]
+.right-column-white[
+ 
+- ![alt text](pictures/vlan.png "vlan.png")
+
+- Les VLANS sont des configurations essentielles dans un réseau d’entreprise. En effet les VLANs optimisent le réseau et permettent d’implémenter de la sécurité et de la QoS.
+]
+
+---
+class: center, middle, inverse
+# Tester les réseaux
+
+---
+
+.left-column[
+# Tester les réseaux
+### - Cmds
+]
+.right-column-white[
+- **ping :** ```Ping permet de tester l'accessibilité d'un autre équiepemnt a travers un réseau IP. La commande mesure
+également le temps mis pour recevoir une réponse.```
+
+- **wget :** ```Commande non intéractive pour télécharger depuis le réseaux.```
+
+- **host :** ```Commande qui permet de trouver l'ip d'un nom DNS```
+
+- **hostname :** ```Nom du serveur```
+
+- **netstat :** ```Commande permettant d'afficher les connections réseaux du système```
+
+- **dig :** ``` Commande qui permet de diagnostiquer les dysfonctionnements dans la résolution de nom.```
+
+- **nc :** ```Commande qui permet de tester des ports.```
+
+- **apr :** ``` Commande qui permet de manipuler des tables ARP.```
+
+- **tcpdump :** ```Tcpdump est un outil de capture et d'analyse réseau.```
+
+- **iptables :** ```Iptables permet de configurer des règles dans le pare-feu linux```
+
+]
+---
+
+.left-column[
+# Tester les réseaux
+### - Cmds
+### - Pratique
+
+]
+.right-column-white[
+1. Affichier les application en écoute sur le système.
+
+2. Vérifier que le port 443 est bien ouvert entre vous et www.google.fr
+
+3. Ecouter tous les échange en 443 sur la carte votre carte réseaux principale.
+]
+
+---
+
+class: center, middle, inverse
+# See you !
+
+---
+    </textarea>
+  <script src="./remark-latest.min.js"></script>
+  <script>
+    var slideshow = remark.create({
+      highlightStyle: 'monokai',
+      highlightLanguage: 'remark',
+      highlightLines: true
+    });
+  </script>
+  <script src="./mermaid.min.js"></script>
+  <link rel="stylesheet" href="./mermaid.css">
+  <script>mermaid.initialize({ startOnLoad: true })
+  </script>
+</body>
+
+</html>

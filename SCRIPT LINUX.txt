@@ -1,0 +1,55 @@
+#! /bin/sh
+echo "######## File System Usage ########" | lolcat
+df -h
+echo "######## Uptime of the server ########" | lolcat
+uptime
+echo "######## Conected Users #######" | lolcat
+who
+echo "######## Top 5 Memory process Used" | lolcat
+ps -eo pmem,pid,user,cmd | sort | tail -n 6 | head -n 5
+ps -eo pmem,pid,user,cmd | sort | tail -n 6 | head -n 5 | sort -r > /tmp/top5
+for i in $(cat /tmp/top5 | awk '{ print $1 }')
+        do
+                if [ ${i/.*} -gt 1 ]
+                then
+                        echo $(date) - warning too high >> /tmp/info_sys
+                else
+                        echo $(date) - toutvabien >> /tmp/info_sys
+
+###################################################################################################################
+
+#!/bin/bashLISTE=ps -eo "pmem" -o ",%p" | sort -k 1 -nr | head -6 | tail -5 | tr -d " "
+IFS=$'\n'for a in $LISTE
+do
+       pid=$(echo $a | cut -f2 -d,)
+       mem=$(echo $a | cut -f1 -d,)
+       echo "pid : $pid, mem : $mem"        if [ $(echo "$mem > 0.3" | bc -l) -eq 1 ]
+       then
+               echo "kill -HUP $pid"
+       else
+               echo "tout va bien"
+       fi
+done
+###################################################################################################################
+#!/bin/sh
+V_infosys=$(uname -a 2>&1)
+V_infsysfich=$(df -h)
+V_uptime=$(uptime)
+V_utilisateurs=$(who)
+V_topprocess=$(ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head -5)
+echo -e "Informations système : \n
+$V_infosys \n Informations système de fichiers : \n
+$V_infsysfich \n Uptime système : \n
+$V_uptime \n Informations utilisateurs : \n
+$V_utilisateurs \n Top 5 processus consommant la mémoire : \n
+$V_topprocess"
+ps -eo pid,ppid,%mem --sort=-%mem | head -5 | while read -r pid cmd pmem ; do
+   echo "pid: $pid, cmd: $cmd, memoire: $pmem"
+   if [ $pmem = 0.7 ]
+   then
+   echo "kill -HUP $pid"
+   else
+   echo "NO"
+   fi
+done (modifié) 
+###################################################################################################################
